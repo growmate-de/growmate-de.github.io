@@ -1,1 +1,0 @@
-# growmate-de.github.io
