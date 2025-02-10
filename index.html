@@ -518,19 +518,70 @@
 
   
 
-    <!-- Newsletter Section -->
-    <section class="py-24 px-6">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-bold mb-6">Stay Updated</h2>
-            <p class="text-xl text-gray-400 mb-8">Get growing tips and exclusive offers straight to your inbox.</p>
-            <form class="flex gap-4 max-w-md mx-auto">
-                <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-3 rounded-full bg-white/10 border border-white/20 focus:outline-none focus:border-green-500">
-                <button class="bg-green-500 hover:bg-green-400 px-8 py-3 rounded-full transition-all">
-                    Subscribe
-                </button>
-            </form>
-        </div>
-    </section>
+<!-- Newsletter Section -->
+<section class="py-24 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-4xl font-bold mb-6">Stay Updated</h2>
+        <p class="text-xl text-gray-400 mb-8">Get growing tips and exclusive offers straight to your inbox.</p>
+        
+        <form id="newsletterForm" class="flex gap-4 max-w-md mx-auto">
+            <input 
+                type="email" 
+                id="emailInput"
+                placeholder="Enter your email" 
+                required
+                class="flex-1 px-6 py-3 rounded-full bg-white/10 border border-white/20 focus:outline-none focus:border-green-500 text-black" <!-- Added text-black -->
+            <button 
+                type="submit" 
+                id="submitButton"
+                class="bg-green-500 hover:bg-green-400 px-8 py-3 rounded-full transition-all text-white" <!-- Added text-white -->
+                Subscribe
+            </button>
+        </form>
+        
+        <div id="message" class="mt-4 text-sm"></div>
+    </div>
+</section>
+
+<script>
+document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const emailInput = document.getElementById('emailInput');
+    const submitButton = document.getElementById('submitButton');
+    const messageDiv = document.getElementById('message');
+    
+    // Disable the button while processing
+    submitButton.disabled = true;
+    submitButton.textContent = 'Subscribing...';
+    
+    try {
+        // Simulation of API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Show success message
+        messageDiv.textContent = 'Thank you for subscribing!';
+        messageDiv.style.color = 'green';
+        
+        // Clear the input
+        emailInput.value = '';
+        
+    } catch (error) {
+        // Show error message
+        messageDiv.textContent = 'Something went wrong. Please try again.';
+        messageDiv.style.color = 'red';
+    } finally {
+        // Re-enable the button
+        submitButton.disabled = false;
+        submitButton.textContent = 'Subscribe';
+        
+        // Clear message after 3 seconds
+        setTimeout(() => {
+            messageDiv.textContent = '';
+        }, 3000);
+    }
+});
+</script>
 
     <!-- Floating CTA -->
     <div class="fixed bottom-24 md:bottom-20 right-8 z-40 floating-cta">
